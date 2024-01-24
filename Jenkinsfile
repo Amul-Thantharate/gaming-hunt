@@ -13,6 +13,11 @@ pipeline{
         SCANNER_HOME=tool 'sonar-scanner'
     }
     stages {
+        stage("Clean workspace"){
+            steps{
+                cleanWs()
+            }
+        }
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
