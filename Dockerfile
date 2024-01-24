@@ -1,23 +1,25 @@
-# Use the official Node.js 16 image
-FROM node:16
+# Use the official Node.js 16 image as worker entrypoint
+FROM node:16  as worker 
 
-# Set the working directory in the container
+# Create and change to the app directory.
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy application dependency manifests to the container image.
+COPY  package*.json /app
 
-# Install dependencies
-RUN npm install
+# Install production dependencies.
+RUN npm install 
 
-# Copy the entire React app source code to the container
-COPY . .
+# Copy local code to the container image.
+COPY . /app/
 
-# Build the React app
+# Run the web service on container startup.
 RUN npm run build
 
-# Expose port 3000 (the port your Node.js app runs on)
-EXPOSE 3000
+FROM nginx:latest
 
-# Start the Node.js app
-CMD ["npm", "start"]
+COPY --from=worker /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
