@@ -33,6 +33,10 @@ pipeline{
 		        }
 	        }
             }
+        stage("Install Npm Dependencies"){
+            steps{
+                sh "npm install"
+            }
     }
     post {
     always {
@@ -43,5 +47,6 @@ pipeline{
             message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} \n build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         )
     }
+}
 }
 }
