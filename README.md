@@ -3,3 +3,5 @@
 Hostinger Hunt is a mystery revealing scavenger hunt website that contains five minigames for developers to have a little fun.
 
 ## Created a docker file
+
+* Created a docker file to run the website on a docker container
