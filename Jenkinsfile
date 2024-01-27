@@ -13,11 +13,6 @@ pipeline{
         SCANNER_HOME=tool 'sonar-scanner'
     }
     stages {
-        stage("Clean workspace"){
-            steps{
-                cleanWs()
-            }
-        }
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
@@ -62,10 +57,10 @@ pipeline{
         stage("Docker Build & Push"){
             steps{
                 script{
-                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh "docker build -t gaming-hunt ."
-                        sh "docker tag gaming-hunt amuldark/gaming-hunt:latest "
-                        sh "docker push amuldark/gaming-hunt:latest"
+                    dir('Docker'){
+                        sh 'docker build -t gaming-hunt .'
+                        sh 'docker tag amuldark/gaming-hunt:latest'
+                        sh 'docker push amuldark/gaming-hunt:latest'
                     }
                 }
             }
