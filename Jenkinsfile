@@ -49,6 +49,17 @@ pipeline{
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
+        stage('Docker Scout FS') {
+            steps {
+                script{
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
+                        sh 'docker-scout quickview fs://.'
+                        sh 'docker-scout cves fs://.'
+                    }
+                }
+            }
+        }
+        
     }
     post {
     always {
