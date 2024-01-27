@@ -5,7 +5,9 @@ FROM node:16
 WORKDIR /app
 
 # Copy application dependency manifests to the container image.
-COPY  package*.json /app
+COPY  package.json /app/
+
+COPY package-lock.json /app/
 
 # Install production dependencies.
 RUN npm install 
