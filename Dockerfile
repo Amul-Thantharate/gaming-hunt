@@ -1,5 +1,5 @@
-# Use the official Node.js 16 image as worker entrypoint
-FROM node:16  as worker 
+# Use the official Node.js 16 image 
+FROM node:16  
 
 # Create and change to the app directory.
 WORKDIR /app
@@ -14,12 +14,7 @@ RUN npm install
 COPY . /app/
 
 # Run the web service on container startup.
-RUN npm run build
+EXPOSE 3000
 
-FROM nginx:latest
-
-COPY --from=worker /app/build /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+# Run the web service on container startup.
+CMD npm start
