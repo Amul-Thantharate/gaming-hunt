@@ -1,6 +1,8 @@
 # Use the official Node.js 16 image 
 FROM node:16  
 
+LABEL Sakura="amulthantharate@gmail.com"
+
 # Create and change to the app directory.
 WORKDIR /app
 
