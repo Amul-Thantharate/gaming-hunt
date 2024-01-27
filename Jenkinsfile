@@ -53,7 +53,7 @@ pipeline{
             steps{
                 script{
                         sh 'docker build -t gaming-hunt .'
-                        sh 'docker tag amuldark/gaming-hunt:latest'
+                        sh 'docker tag gaming-hunt:latest amuldark/gaming-hunt:latest'
                         sh 'docker push amuldark/gaming-hunt:latest'
                 }
             }
