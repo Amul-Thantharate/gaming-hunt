@@ -57,11 +57,9 @@ pipeline{
         stage("Docker Build & Push"){
             steps{
                 script{
-                    dir('Docker'){
                         sh 'docker build -t gaming-hunt .'
                         sh 'docker tag amuldark/gaming-hunt:latest'
                         sh 'docker push amuldark/gaming-hunt:latest'
-                    }
                 }
             }
         }
