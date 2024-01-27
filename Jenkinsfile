@@ -53,13 +53,13 @@ pipeline{
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh 'docker-scout quickview fs://.'
-                        sh 'docker-scout cves fs://.'
+                        sh 'docker scout quickview fs://.'
+                        sh 'docker scout cves fs://.'
                     }
                 }
             }
         }
-        
+
     }
     post {
     always {
