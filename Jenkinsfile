@@ -64,7 +64,6 @@ pipeline{
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh 'docker-scout quickview amuldark/gaming-hunt:latest'
                         sh 'docker-scout cves amuldark/gaming-hunt:latest'
                         sh 'docker-scout recommendations amuldark/gaming-hunt:latest'
                     }
