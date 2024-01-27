@@ -53,9 +53,8 @@ pipeline{
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh 'curl -sSfL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh | sh -s -- -b /usr/local/bin'
-                        sh 'docker scout quickview fs://.'
-                        sh 'docker scout cves fs://.'
+                        sh 'docker-scout quickview fs://.'
+                        sh 'docker-scout cves fs://.'
                     }
                 }
             }
