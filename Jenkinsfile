@@ -59,6 +59,15 @@ pipeline{
                 }
             }
         }
+        stage("Docker Build & Push"){
+            steps{
+                withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
+                    sh "docker build -t gaming-hunt ."
+                    sh "docker tag amuldark/gaming-hunt:latest"
+                    sh "docker push amuldark/gaming-hunt:latest"
+                }
+            }
+        }
 
     }
     post {
