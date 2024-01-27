@@ -52,9 +52,11 @@ pipeline{
         stage("Docker Build & Push"){
             steps{
                 script{
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                         sh 'docker build -t gaming-hunt .'
                         sh 'docker tag gaming-hunt:latest amuldark/gaming-hunt:latest'
                         sh 'docker push amuldark/gaming-hunt:latest'
+                }
                 }
             }
         }
