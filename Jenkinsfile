@@ -60,12 +60,11 @@ pipeline{
                 }
             }
         }
-        stage('Docker Scout Image') {
+        stage('Trivy image scan') {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh 'docker-scout cves amuldark/gaming-hunt:latest'
-                        sh 'docker-scout recommendations amuldark/gaming-hunt:latest'
+                        sh 'trivy image --severity HIGH,CRITICAL amuldark/gaming-hunt:latest'
                     }
                 }
             }
