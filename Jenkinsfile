@@ -74,6 +74,15 @@ pipeline{
                 }
             }
         }
+        stage("Run the Docker Container"){
+            steps{
+                script{
+                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
+                        sh 'docker run -d -p 3000:3000 --name=hunt amuldark/gaming-hunt:latest'
+                    }
+                }
+            }
+        }
 
     }
     post {
