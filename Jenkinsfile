@@ -59,8 +59,8 @@ pipeline{
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                         sh 'docker build -t gaming-hunt .'
-                        sh 'docker tag gaming-hunt:latest amuldark/gaming-hunt:latest'
-                        sh 'docker push amuldark/gaming-hunt:latest'
+                        sh 'docker tag gaming-hunt:v1 amuldark/gaming-hunt:v1'
+                        sh 'docker push amuldark/gaming-hunt:v1'
                 }
                 }
             }
@@ -69,7 +69,7 @@ pipeline{
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh 'trivy image --severity HIGH,CRITICAL amuldark/gaming-hunt:latest'
+                        sh 'trivy image --severity HIGH,CRITICAL amuldark/gaming-hunt:v1'
                     }
                 }
             }
@@ -78,7 +78,9 @@ pipeline{
             steps{
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh 'docker run -d -p 3000:3000 --name=hunt amuldark/gaming-hunt:latest'
+                        sh 'docker stop hunt'
+                        sh 'docker rm hunt'
+                        sh 'docker run -d -p 3000:3000 --name=huntv1 amuldark/gaming-hunt:v1'
                     }
                 }
             }

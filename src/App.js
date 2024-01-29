@@ -143,7 +143,7 @@ function App() {
             />
           </div>
         }
-        <h1>Hostinger Hunt</h1>
+        <h1>Hacker World</h1>
       </div>
       {renderCurrentLevel()}
       <div className="progress-container">
