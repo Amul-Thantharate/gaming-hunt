@@ -13,6 +13,11 @@ pipeline{
         SCANNER_HOME=tool 'sonar-scanner'
     }
     stages {
+        stage("Clear Workspace"){
+            steps{
+                cleanWs()
+            }
+        }
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
@@ -78,8 +83,6 @@ pipeline{
             steps{
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh 'docker stop hunt1'
-                        sh 'docker rm hunt1'
                         sh 'docker run -d -p 3000:3000 --name=huntv1 amuldark/gaming-hunt:v1'
                     }
                 }
