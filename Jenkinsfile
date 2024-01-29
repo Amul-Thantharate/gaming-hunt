@@ -58,7 +58,7 @@ pipeline{
             steps{
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh 'docker build -t gaming-hunt .'
+                        sh 'docker build -t gaming-hunt:v1 .'
                         sh 'docker tag gaming-hunt:v1 amuldark/gaming-hunt:v1'
                         sh 'docker push amuldark/gaming-hunt:v1'
                 }
