@@ -39,6 +39,11 @@ pipeline{
                 dependencyCheckPublisher pattern: '**/dependency-check-report.xml'
             }
         }
+        stage("File System Scan"){
+            steps{
+                sh "trivy fs --severity HIGH,CRITICAL . "
+            }
+        }
         stage('Docker Scout FS') {
             steps {
                 script{
