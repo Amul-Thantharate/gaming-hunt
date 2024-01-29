@@ -78,8 +78,8 @@ pipeline{
             steps{
                 script{
                     withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
-                        sh 'docker stop hunt'
-                        sh 'docker rm hunt'
+                        sh 'docker stop hunt1'
+                        sh 'docker rm hunt1'
                         sh 'docker run -d -p 3000:3000 --name=huntv1 amuldark/gaming-hunt:v1'
                     }
                 }
